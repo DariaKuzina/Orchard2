@@ -1,0 +1,17 @@
+﻿@model Orchard.ContentFields.ViewModels.DisplayDateTimeFieldViewModel
+@using Orchard.ContentFields.Settings;
+@using Orchard.ContentManagement.Metadata.Models
+@using System.Globalization;
+@{
+    var settings = Model.PartFieldDefinition.Settings.ToObject<DateTimeFieldSettings>();
+    var dateTime = @Model.Field.Value;
+}
+
+
+@if (dateTime.HasValue)
+{
+    <div>
+        @Model.PartFieldDefinition.DisplayName(): @dateTime.Value.ToString(settings.Format, CultureInfo.InvariantCulture)
+    </div>
+}
+

@@ -1,0 +1,33 @@
+﻿@model Orchard.ContentFields.ViewModels.EditDateTimeFieldViewModel
+@using Orchard.ContentManagement.Metadata.Models
+@using Orchard.ContentFields.Settings;
+
+@{
+    var settings = Model.PartFieldDefinition.Settings.ToObject<DateTimeFieldSettings>();
+}
+
+<script asp-name="jquery" asp-src="/Orchard.Resources/Scripts/jquery-3.1.1.min.js" debug-src="/Orchard.Resources/Scripts/jquery-3.1.1.min.js" at="Foot"></script>
+<style asp-name="jquery-ui" asp-src="/Orchard.Resources/Scripts/jquery-ui.js" debug-src="/Orchard.Resources/Scripts/jquery-ui.js"></style>
+<style asp-name="jq-date-picker" asp-src="/Orchard.Resources/Styles/datepicker.css" debug-src="/Orchard.Resources/Styles/datepicker.css"></style>
+
+
+<fieldset>
+    <label asp-for="Value">@Model.PartFieldDefinition.DisplayName()</label>
+    <input asp-for="Value" class="form-control datepicker" />
+    @if (!String.IsNullOrEmpty(settings.Hint))
+    {
+        <span class="hint">@settings.Hint</span>
+    }
+</fieldset>
+
+<script at="Foot">
+    $(function () {
+        $('.datepicker').datepicker({
+            changeYear: true,
+            changeMonth: true,
+        }).on('changeDate', function (e) {
+            $(this).valid();
+        });
+    });
+
+</script>
